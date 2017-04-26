@@ -4,10 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+/**
+ * This class represents the cars in our SimRace.
+ * 
+ * @author Anil Ersin Kaya
+ * @author Ali Calis
+ * @version 0.1
+ * @see java.lang.Thread
+ * @see java.lang.Runnable
+ */
+
 public class Car implements Runnable, Comparable<Car> {
 	private Thread t;
 	private String threadName;
-	private int gesFahrZeit;
+	private int finishTime;
 	private Map<Integer, Integer> lapDur;
 	private Random rand;
 	private int laps;
@@ -21,19 +31,15 @@ public class Car implements Runnable, Comparable<Car> {
 	public void run() {
 		int l = 0;
 		while (!t.isInterrupted() && l != laps) {
-			// continue processing
 			l++;
 			Integer i = rand.nextInt(100);
-			addLapDur(l, i);
-			setGesFahrZeit(i + getGesFahrZeit());
-
 			try {
 				Thread.sleep(i);
 			} catch (InterruptedException e) {
-				// good practice
 				t.interrupt();
-
 			}
+			addLapDur(l, i);
+			setGesFahrZeit(i + getGesFahrZeit());
 		}
 	}
 
@@ -41,21 +47,23 @@ public class Car implements Runnable, Comparable<Car> {
 		if (t == null) {
 			t = new Thread(this, threadName);
 			t.start();
-
 		}
 		this.laps = laps;
 	}
 
-	public void raceDuration() throws InterruptedException {
-		for (Integer l = 0; l < laps; l++) {
-			Integer i = rand.nextInt(100);
-			addLapDur(l, i);
-			setGesFahrZeit(i + getGesFahrZeit());
+	// public void raceDuration() {
+	// for (Integer l = 0; l < laps; l++) {
+	// Integer i = rand.nextInt(100);
+	// addLapDur(l, i);
+	// setGesFahrZeit(i + getGesFahrZeit());
+	// try {
+	// Thread.sleep(i);
+	// } catch (InterruptedException e) {
 
-			Thread.sleep(i);
-		}
-
-	}
+	// e.printStackTrace();
+	// }
+	// }
+	// }
 
 	public Map<Integer, Integer> getLapDur() {
 		return lapDur;
@@ -98,11 +106,11 @@ public class Car implements Runnable, Comparable<Car> {
 	}
 
 	public int getGesFahrZeit() {
-		return gesFahrZeit;
+		return finishTime;
 	}
 
 	public void setGesFahrZeit(int gesFahrZeit) {
-		this.gesFahrZeit = gesFahrZeit;
+		this.finishTime = gesFahrZeit;
 	}
 
 	public int getLapDur(Integer key) {
@@ -115,17 +123,16 @@ public class Car implements Runnable, Comparable<Car> {
 
 	@Override
 	public String toString() {
-		return threadName + ", " + gesFahrZeit;
+		return threadName + ", " + finishTime;
 	}
 
 	@Override
 	public int compareTo(Car o) {
-		if (this.getGesFahrZeit() > o.gesFahrZeit) {
+		if (this.getGesFahrZeit() > o.finishTime) {
 			return 1;
-		} else if (this.getGesFahrZeit() < o.gesFahrZeit) {
+		} else if (this.getGesFahrZeit() < o.finishTime) {
 			return -1;
 		}
 		return 0;
 	}
-
 }

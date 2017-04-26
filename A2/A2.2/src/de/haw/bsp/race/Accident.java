@@ -2,37 +2,34 @@ package de.haw.bsp.race;
 
 import java.util.Random;
 
+/**
+ * @author Anil Ersin Kaya
+ * @author Ali Calis
+ * @version 0.1
+ */
+
 public class Accident implements Runnable {
 	private Thread t;
 	private String threadName;
+	private SimRace sr;
+	private int accidentInterval;
 
-	public Accident(String name) {
+	public Accident(String name, SimRace sr, int accidentInterval) {
 		this.threadName = name;
+		this.accidentInterval = accidentInterval;
+		this.sr = sr;
 	}
 
 	@Override
 	public void run() {
 		Random rand = new Random();
-		int r = rand.nextInt(2000);
+		int r = rand.nextInt(accidentInterval);
 		try {
-
 			Thread.sleep(r);
-			System.out.println("crash");
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Kein Unfall passiert.");
 			t.interrupt();
 		}
-		Thread[] t = new Thread[Thread.activeCount()];
-		Thread.enumerate(t);
-		for (int i = 0; i < t.length; i++) {
-			if (!t[i].getName().equals("main") && !t[i].getName().equals(threadName)) {
-				t[i].interrupt();
-			}
-		}
-		if (!this.t.isInterrupted()) {
-			System.exit(0);
-		}
+		getSr().stopAllCars();
 	}
 
 	public void start() {
@@ -40,6 +37,22 @@ public class Accident implements Runnable {
 			t = new Thread(this, threadName);
 			t.start();
 		}
+	}
+
+	public SimRace getSr() {
+		return sr;
+	}
+
+	public void setSr(SimRace sr) {
+		this.sr = sr;
+	}
+
+	public int getAccidentInterval() {
+		return accidentInterval;
+	}
+
+	public void setAccidentInterval(int accidentInterval) {
+		this.accidentInterval = accidentInterval;
 	}
 
 	public Thread getT() {
