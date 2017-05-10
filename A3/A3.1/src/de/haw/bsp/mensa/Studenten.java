@@ -7,36 +7,38 @@ public class Studenten implements Runnable {
 	private String name;
 	private Thread t;
 	private Mensa m;
-
-	Random r;
+	private boolean anDerKasse;
+	private Random r;
 
 	public Studenten(String name) {
 		this.name = name;
 		r = new Random();
+		anDerKasse = false;
 	}
 
 	public void run() {
 		Kasse kasse = new Kasse("");
 		while (!t.isInterrupted()) {
-
-			if (!kasse.getWarteSchlange().contains(this)) {
+			if (m.isClosed()) {
+				t.interrupt();
+			} else if (!kasse.getWarteSchlange().contains(this)) {
 				try {
 					kommtZurück();
 				} finally {
 					kasse = geheZuKasse(m);
 				}
-			} else if (kasse.getWarteSchlange().get(0) == this) {
+			} else if (kasse.getWarteSchlange().peek() == this) {
 				System.out.println("my name is " + name + " an der kasse " + kasse.getName());
 				try {
 					kasse.kasseLock();
 				} catch (Exception e) {
-			
+
 					e.printStackTrace();
 				}
 				bezahlen();
-
-				kasse.getWarteSchlange().remove(this);
 				kasse.kasseRelease();
+				kasse.getWarteSchlange().poll();
+				anDerKasse = false;
 				essen();
 
 			}
@@ -51,18 +53,19 @@ public class Studenten implements Runnable {
 		this.m = m;
 	}
 
-	private void bezahlen() {
+	private void essen() {
+
 		try {
-			Thread.sleep(r.nextInt(5000));
+			Thread.sleep(r.nextInt(100));
 		} catch (InterruptedException e) {
 			t.interrupt();
 		}
 	}
 
-	private void essen() {
+	private void bezahlen() {
 
 		try {
-			Thread.sleep(r.nextInt(100));
+			Thread.sleep(r.nextInt(1000));
 		} catch (InterruptedException e) {
 			t.interrupt();
 		}
@@ -76,7 +79,7 @@ public class Studenten implements Runnable {
 		}
 	}
 
-	public Kasse geheZuKasse(Mensa m) {
+	private Kasse geheZuKasse(Mensa m) {
 		Kasse min = m.getKassen().stream().min(new Comparator<Kasse>() {
 			@Override
 			public int compare(Kasse o1, Kasse o2) {
@@ -89,6 +92,7 @@ public class Studenten implements Runnable {
 				}
 			}
 		}).get();
+		anDerKasse = true;
 		min.addWarteSchlange(this);
 		return min;
 	}
@@ -99,5 +103,9 @@ public class Studenten implements Runnable {
 
 	public String getName() {
 		return name;
+	}
+
+	public boolean isAnDerKasse() {
+		return anDerKasse;
 	}
 }

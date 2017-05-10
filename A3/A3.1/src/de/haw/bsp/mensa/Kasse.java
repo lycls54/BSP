@@ -1,19 +1,19 @@
 package de.haw.bsp.mensa;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.concurrent.Semaphore;
 
 public class Kasse {
 
 	private Semaphore semaphore;
-	private List<Studenten> warteSchlange;
+	private Queue<Studenten> warteSchlange;
 	private String name;
 
 	public Kasse(String name) {
 		this.name = name;
 		semaphore = new Semaphore(1);
-		warteSchlange = new ArrayList<>();
+		warteSchlange = new LinkedList<>();
 	}
 
 	public void kasseLock() {
@@ -28,9 +28,7 @@ public class Kasse {
 	}
 
 	public void kasseRelease() {
-
 		semaphore.release();
-		// System.out.println("Locks Released");
 	}
 
 	public String getName() {
@@ -41,7 +39,7 @@ public class Kasse {
 		return semaphore;
 	}
 
-	public List<Studenten> getWarteSchlange() {
+	public Queue<Studenten> getWarteSchlange() {
 		return warteSchlange;
 	}
 

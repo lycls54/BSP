@@ -2,6 +2,7 @@ package de.haw.bsp.race;
 
 import java.util.Arrays;
 
+
 /**
  * This class simulates a race between objects of the class Car.
  * 

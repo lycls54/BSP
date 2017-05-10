@@ -1,7 +1,6 @@
 package de.haw.bsp.mensa;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Main {
@@ -10,22 +9,23 @@ public class Main {
 		Mensa mensa = new Mensa(3);
 		List<Studenten> stList = new ArrayList<>();
 		for (int i = 0; i < 10; i++) {
-			stList.add(new Studenten("Student " + i));
-			stList.get(i).start(mensa);
+			Studenten s = new Studenten("Student " + i);
+			stList.add(s);
+			s.start(mensa);
 		}
 
 		try {
-			Thread.sleep(1000);
+			Thread.sleep(3000);
 		} catch (InterruptedException e) {
 
 			e.printStackTrace();
 		}
 
-		for (Iterator<Studenten> iterator = stList.iterator(); iterator.hasNext();) {
-			Studenten studenten = (Studenten) iterator.next();
-			studenten.getT().interrupt();
+		mensa.setClosed(true);
+		while (Thread.activeCount() > 1) {
+			// wait
 		}
-
+		System.out.println(Thread.activeCount());
 	}
 
 }
