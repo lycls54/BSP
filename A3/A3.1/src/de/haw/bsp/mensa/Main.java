@@ -15,17 +15,17 @@ public class Main {
 		}
 
 		try {
-			Thread.sleep(3000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 
 			e.printStackTrace();
 		}
 
 		mensa.setClosed(true);
-		while (Thread.activeCount() > 1) {
-			// wait
-		}
-		System.out.println(Thread.activeCount());
+		// while (Thread.activeCount() > 1) {
+		// // wait
+		// }
+		// System.out.println(Thread.activeCount());
 	}
 
 }

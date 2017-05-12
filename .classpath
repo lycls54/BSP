@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="A2/A2.2/src"/>
-        <classpathentry kind="src" path="A3/A3.1/src"/>
+	<classpathentry kind="src" path="A3/A3.1/src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="output" path="A2/A2.2/bin"/>
 </classpath>

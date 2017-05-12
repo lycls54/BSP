@@ -28,7 +28,7 @@ public class Studenten implements Runnable {
 					kasse = geheZuKasse(m);
 				}
 			} else if (kasse.getWarteSchlange().peek() == this) {
-				System.out.println("my name is " + name + " an der kasse " + kasse.getName());
+				System.out.println("my name is " + name + " und ich bin an der kasse " + kasse.getName());
 				try {
 					kasse.kasseLock();
 				} catch (Exception e) {
