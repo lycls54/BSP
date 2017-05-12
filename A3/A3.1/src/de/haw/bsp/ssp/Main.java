@@ -10,7 +10,7 @@ public class Main {
 		s1.start();
 		s2.start();
 		s.start();
-		s.stopDasSpiel(1000);
+		s.stopDasSpiel(10000);
 		s.printErgebniss();
 	}
 }

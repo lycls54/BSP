@@ -9,7 +9,18 @@ public class SpielerThread extends Spieler implements Runnable {
 	}
 
 	public void run() {
-		getTisch().getDesktop().add((choose()));
+		while (!t.isInterrupted()) {
+			synchronized (getTisch().getS()) {
+				getTisch().getDesktop().add((choose()));
+
+				try {
+					getTisch().getS().wait();
+
+				} catch (InterruptedException e) {
+					t.interrupt();
+				}
+			}
+		}
 	}
 
 	public void start() {
