@@ -21,13 +21,15 @@ public class Studenten implements Runnable {
 		while (!t.isInterrupted()) {
 			if (m.isClosed()) {
 				t.interrupt();
-			} else if (!kasse.getWarteSchlange().contains(this)) {
+			} else {
 				try {
 					kommtZurück();
 				} finally {
 					kasse = geheZuKasse(m);
 				}
-			} else if (kasse.getWarteSchlange().peek() == this) {
+			}
+
+			if (kasse.getWarteSchlange().peek() == this) {
 				System.out.println("my name is " + name + " und ich bin an der kasse " + kasse.getName());
 				try {
 					kasse.kasseLock();
@@ -42,6 +44,7 @@ public class Studenten implements Runnable {
 				essen();
 
 			}
+
 		}
 	}
 
@@ -65,7 +68,7 @@ public class Studenten implements Runnable {
 	private void bezahlen() {
 
 		try {
-			Thread.sleep(r.nextInt(1000));
+			Thread.sleep(r.nextInt(2000));
 		} catch (InterruptedException e) {
 			t.interrupt();
 		}
@@ -73,7 +76,7 @@ public class Studenten implements Runnable {
 
 	private void kommtZurück() {
 		try {
-			Thread.sleep(r.nextInt(3000));
+			Thread.sleep(r.nextInt(100));
 		} catch (InterruptedException e) {
 			t.interrupt();
 		}
