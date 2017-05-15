@@ -39,7 +39,7 @@ public class Studenten implements Runnable {
 				}
 				bezahlen();
 				kasse.kasseRelease();
-				kasse.getWarteSchlange().poll();
+				kasse.removeFromWarteSchlange();
 				anDerKasse = false;
 				essen();
 
@@ -96,7 +96,7 @@ public class Studenten implements Runnable {
 			}
 		}).get();
 		anDerKasse = true;
-		min.addWarteSchlange(this);
+		min.addZuWarteSchlange(this);
 		return min;
 	}
 

@@ -39,12 +39,16 @@ public class Kasse {
 		return semaphore;
 	}
 
-	public Queue<Studenten> getWarteSchlange() {
+	public synchronized Queue<Studenten> getWarteSchlange() {
 		return warteSchlange;
 	}
 
-	public void addWarteSchlange(Studenten student) {
+	public synchronized void addZuWarteSchlange(Studenten student) {
 		this.warteSchlange.add(student);
+	}
+
+	public synchronized Studenten removeFromWarteSchlange() {
+		return this.warteSchlange.poll();
 	}
 
 }
