@@ -13,7 +13,7 @@ import de.haw.bsp.ssp.Spieler;
 public class ConsumerProducer {
 
 	static Semaphore semaphore = new Semaphore(0);
-	static Semaphore mutex = new Semaphore(2);
+	static Semaphore mutex = new Semaphore(1);
 
 	static class SpielerThreadV2 extends Spieler implements Runnable {
 
@@ -24,25 +24,24 @@ public class ConsumerProducer {
 		}
 
 		public void run() {
+			while (!t.isInterrupted()) {
+				try {
 
-			try {
-				while (!t.isInterrupted()) {
 					mutex.acquire();
 
 					getTisch().getDesktop().add(choose());
 
-					mutex.release();
-
 					// release lock
 					if (getTisch().getDesktop().size() >= 2) {
 						semaphore.release();
+						mutex.acquire();
 					}
-					Thread.sleep(500);
+//					 Thread.sleep(500);
+					mutex.release();
+				} catch (Exception x) {
+					t.interrupt();
 				}
-			} catch (Exception x) {
-				t.interrupt();
 			}
-
 		}
 
 		public void start() {
@@ -66,19 +65,17 @@ public class ConsumerProducer {
 
 		public void run() {
 			System.out.println("Das Spiel geht weiter");
-			try {
-				while (!t.isInterrupted()) {
-
+			while (!t.isInterrupted()) {
+				try {
 					semaphore.acquire();
-	
-					mutex.acquire();
 
 					auswerten();
 					getTisch().getDesktop().clear();
 					mutex.release();
+
+				} catch (Exception e) {
+					t.interrupt();
 				}
-			} catch (Exception e) {
-				t.interrupt();
 			}
 		}
 
@@ -93,7 +90,7 @@ public class ConsumerProducer {
 			try {
 				Thread.sleep(l);
 			} catch (InterruptedException e) {
-			t.interrupt();
+				t.interrupt();
 			}
 			((SpielerThreadV2) getTisch().getS1()).getT().interrupt();
 			((SpielerThreadV2) getTisch().getS2()).getT().interrupt();

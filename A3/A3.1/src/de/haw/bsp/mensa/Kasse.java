@@ -2,23 +2,23 @@ package de.haw.bsp.mensa;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Kasse {
 
-	private Semaphore semaphore;
+	private ReentrantLock semaphore;
 	private Queue<Studenten> warteSchlange;
 	private String name;
 
 	public Kasse(String name) {
 		this.name = name;
-		semaphore = new Semaphore(1);
+		semaphore = new ReentrantLock();
 		warteSchlange = new LinkedList<>();
 	}
 
 	public void kasseLock() {
 		try {
-			semaphore.acquire();
+			semaphore.lockInterruptibly();
 			// System.out.println("Locks acquired");
 			// System.out.println("Locks remaining >> " +
 			// semaphore.availablePermits());
@@ -28,14 +28,14 @@ public class Kasse {
 	}
 
 	public void kasseRelease() {
-		semaphore.release();
+		semaphore.unlock();
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public Semaphore getSemaphore() {
+	public ReentrantLock getSemaphore() {
 		return semaphore;
 	}
 

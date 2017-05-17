@@ -10,6 +10,8 @@ public class Schiedsrichter {
 
 	public void auswerten() {
 		if (tisch.getDesktop().size() != 2) {
+			System.out.println("nicht auswertbar");
+			System.out.println(tisch.getDesktop().size());
 			return;
 		}
 		Spieler winner = winner();
