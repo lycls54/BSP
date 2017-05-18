@@ -1,7 +1,11 @@
 package de.haw.bsp.ssp;
 
+import java.util.concurrent.Semaphore;
+
 public class SchiedsrichterThread extends Schiedsrichter implements Runnable {
 	private Thread t;
+
+	public Semaphore semaphore = new Semaphore(0);
 
 	public SchiedsrichterThread() {
 
@@ -10,14 +14,19 @@ public class SchiedsrichterThread extends Schiedsrichter implements Runnable {
 	public void run() {
 		System.out.println("Das spiel geht weiter");
 		while (!t.isInterrupted()) {
-			if (getTisch().getDesktop().size() == 2) {
+			// if (getTisch().getDesktop().size() == 2) {
+			try {
+				semaphore.acquire();
 				auswerten();
 				getTisch().getDesktop().clear();
-
-				synchronized (this) {
-					notifyAll();
-				}
+			} catch (InterruptedException e) {
+				getT().interrupt();
 			}
+
+			synchronized (this) {
+				notifyAll();
+			}
+			// }
 		}
 	}
 
@@ -44,7 +53,8 @@ public class SchiedsrichterThread extends Schiedsrichter implements Runnable {
 
 	public void printErgebniss() {
 		System.out.println("Spieler 1 wins " + getErgebnis()[0] + " || Unentschieden " + getErgebnis()[1]
-				+ " || Spieler 2 wins " + getErgebnis()[2]);
+				+ " || Spieler 2 wins " + getErgebnis()[2] + " gesammte Runden Anzahl = "
+				+ (getErgebnis()[0] + getErgebnis()[1] + getErgebnis()[2]));
 	}
 
 	public Thread getT() {

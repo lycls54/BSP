@@ -8,14 +8,14 @@ public class Main {
 	public static void main(String[] args) {
 		Mensa mensa = new Mensa(3);
 		List<Studenten> stList = new ArrayList<>();
-		for (int i = 0; i < 50; i++) {
+		for (int i = 0; i < 10; i++) {
 			Studenten s = new Studenten("Student " + i);
 			stList.add(s);
 			s.start(mensa);
 		}
 
 		try {
-			Thread.sleep(30000);
+			Thread.sleep(10000);
 		} catch (InterruptedException e) {
 
 			e.printStackTrace();

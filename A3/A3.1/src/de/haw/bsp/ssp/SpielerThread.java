@@ -13,6 +13,10 @@ public class SpielerThread extends Spieler implements Runnable {
 			synchronized (getTisch().getS()) {
 				getTisch().getDesktop().add((choose()));
 
+				if (getTisch().getDesktop().size() == 2) {
+					((SchiedsrichterThread) getTisch().getS()).semaphore.release();
+				}
+
 				try {
 					getTisch().getS().wait();
 

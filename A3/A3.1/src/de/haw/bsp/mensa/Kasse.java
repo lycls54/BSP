@@ -28,7 +28,11 @@ public class Kasse {
 	}
 
 	public void kasseRelease() {
-		semaphore.unlock();
+		try {
+			semaphore.unlock();
+		} catch (IllegalMonitorStateException e) {
+
+		}
 	}
 
 	public String getName() {
