@@ -17,7 +17,19 @@ public class Main {
 		s1.start();
 		s2.start();
 		s.start();
-		s.stopDasSpiel(10000);
+
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("stopped");
+		s1.getT().interrupt();
+		s2.getT().interrupt();
+		s.getT().interrupt();
+		
+		
 		s.printErgebniss();
 	}
 }

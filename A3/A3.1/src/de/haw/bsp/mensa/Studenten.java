@@ -29,7 +29,7 @@ public class Studenten implements Runnable {
 				t.interrupt();
 			} else {
 				try {
-					kommtZurück();
+					kommtZurueck();
 				} finally {
 					kasse = geheZuKasse(m);
 				}
@@ -80,7 +80,7 @@ public class Studenten implements Runnable {
 		}
 	}
 
-	private void kommtZurück() {
+	private void kommtZurueck() {
 		try {
 			Thread.sleep(r.nextInt(100));
 		} catch (InterruptedException e) {

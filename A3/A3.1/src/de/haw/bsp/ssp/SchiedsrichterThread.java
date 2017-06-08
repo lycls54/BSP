@@ -6,45 +6,28 @@ package de.haw.bsp.ssp;
  * @author Anil Ersin Kaya
  * @version 0.1
  */
-import java.util.concurrent.Semaphore;
 
 public class SchiedsrichterThread extends Schiedsrichter implements Runnable {
 	private Thread t;
 
-	public Semaphore semaphore = new Semaphore(0);
-
-	public SchiedsrichterThread() {
-
-	}
-
 	public void run() {
 		System.out.println("Das spiel geht weiter");
 		while (!t.isInterrupted()) {
-			// if (getTisch().getDesktop().size() == 2) {
-			try {
-				semaphore.acquire();
-				auswerten();
-				getTisch().getDesktop().clear();
-			} catch (InterruptedException e) {
-				getT().interrupt();
-			}
-				synchronized (this) {
-					notifyAll();
-				}
-			} //else {
-				synchronized (SpielerThread.getLock()) {
+			synchronized (SpielerThread.lock) {
+				while (getTisch().getDesktop().size() != 2 && !t.isInterrupted()) {
 					try {
-						SpielerThread.getLock().wait();
+						SpielerThread.lock.wait();
 					} catch (InterruptedException e) {
 						getT().interrupt();
 					}
 				}
-			synchronized (this) {
-				notifyAll();
+			}
+			auswerten();
+			getTisch().getDesktop().clear();
+
 			synchronized (this) {
 				notifyAll();
 			}
-		 //}
 		}
 	}
 
@@ -53,20 +36,6 @@ public class SchiedsrichterThread extends Schiedsrichter implements Runnable {
 			t = new Thread(this);
 			t.start();
 		}
-	}
-
-	public void stopDasSpiel(long l) {
-		try {
-			Thread.sleep(l);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("stopped");
-		((SpielerThread) getTisch().getS1()).getT().interrupt();
-		((SpielerThread) getTisch().getS2()).getT().interrupt();
-
-		this.t.interrupt();
 	}
 
 	public void printErgebniss() {

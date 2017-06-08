@@ -20,7 +20,18 @@ public class MainV2 {
 		cp.start();
 		cp2.start();
 		cc.start();
-		cc.stopDasSpiel(10000);
+
+		// stop the game
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			cc.getT().interrupt();
+		}
+		cp.getT().interrupt();
+		cp.getT().interrupt();
+		cc.getT().interrupt();
+		System.out.println("Stopped");
+		//
 		cc.printErgebniss();
 	}
 

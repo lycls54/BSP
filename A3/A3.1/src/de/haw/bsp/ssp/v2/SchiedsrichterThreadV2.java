@@ -49,22 +49,13 @@ public class SchiedsrichterThreadV2 extends Schiedsrichter implements Runnable {
 	}
 
 	public void stopDasSpiel(long l) {
-		try {
-			Thread.sleep(l);
-		} catch (InterruptedException e) {
-			t.interrupt();
-		}
-		((SpielerThreadV2) getTisch().getS1()).getT().interrupt();
-		((SpielerThreadV2) getTisch().getS2()).getT().interrupt();
 
-		this.t.interrupt();
-
-		System.out.println("Stopped");
 	}
 
 	public void printErgebniss() {
 		System.out.println("Spieler 1 wins " + getErgebnis()[0] + " || Unentschieden " + getErgebnis()[1]
-				+ " || Spieler 2 wins " + getErgebnis()[2]);
+				+ " || Spieler 2 wins " + getErgebnis()[2] + " gesammte Runden Anzahl = "
+				+ (getErgebnis()[0] + getErgebnis()[1] + getErgebnis()[2]));
 	}
 
 	public Thread getT() {

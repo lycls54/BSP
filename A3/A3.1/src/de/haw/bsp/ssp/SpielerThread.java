@@ -9,7 +9,7 @@ package de.haw.bsp.ssp;
 public class SpielerThread extends Spieler implements Runnable {
 
 	private Thread t;
-	private static final Object lock = new Object();
+	public static final Object lock = new Object();
 
 	public SpielerThread(String name) {
 		super(name);
@@ -19,11 +19,6 @@ public class SpielerThread extends Spieler implements Runnable {
 		while (!t.isInterrupted()) {
 			synchronized (getTisch().getS()) {
 				getTisch().getDesktop().add((choose()));
-
-				if (getTisch().getDesktop().size() == 2) {
-					((SchiedsrichterThread) getTisch().getS()).semaphore.release();
-				}
-
 				try {
 					synchronized (lock) {
 
@@ -47,9 +42,5 @@ public class SpielerThread extends Spieler implements Runnable {
 
 	public Thread getT() {
 		return t;
-	}
-
-	public static Object getLock() {
-		return lock;
 	}
 }
