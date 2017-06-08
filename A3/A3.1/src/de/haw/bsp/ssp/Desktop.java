@@ -3,6 +3,12 @@ package de.haw.bsp.ssp;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Ali Calis
+ * @author Serhat Kocaoez
+ * @author Anil Ersin Kaya
+ * @version 0.1
+ */
 public class Desktop<T> {
 	private List<T> myList;
 

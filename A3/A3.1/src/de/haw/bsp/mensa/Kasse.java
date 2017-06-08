@@ -4,6 +4,12 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * @author Ali Calis
+ * @author Serhat Kocaoez
+ * @author Anil Ersin Kaya
+ * @version 0.1
+ */
 public class Kasse {
 
 	private ReentrantLock semaphore;

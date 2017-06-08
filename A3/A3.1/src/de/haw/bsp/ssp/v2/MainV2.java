@@ -1,8 +1,13 @@
 package de.haw.bsp.ssp.v2;
 
 import de.haw.bsp.ssp.Tisch;
-import de.haw.bsp.ssp.v2.ConsumerProducer.SpielerThreadV2;
-import de.haw.bsp.ssp.v2.ConsumerProducer.SchiedsrichterThreadV2;
+
+/**
+ * @author Ali Calis
+ * @author Serhat Kocaoez
+ * @author Anil Ersin Kaya
+ * @version 0.2
+ */
 
 public class MainV2 {
 

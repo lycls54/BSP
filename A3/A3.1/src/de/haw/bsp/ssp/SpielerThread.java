@@ -1,8 +1,15 @@
 package de.haw.bsp.ssp;
 
+/**
+ * @author Ali Calis
+ * @author Serhat Kocaoez
+ * @author Anil Ersin Kaya
+ * @version 0.1
+ */
 public class SpielerThread extends Spieler implements Runnable {
 
 	private Thread t;
+	private static final Object lock = new Object();
 
 	public SpielerThread(String name) {
 		super(name);
@@ -18,6 +25,10 @@ public class SpielerThread extends Spieler implements Runnable {
 				}
 
 				try {
+					synchronized (lock) {
+
+						lock.notifyAll();
+					}
 					getTisch().getS().wait();
 
 				} catch (InterruptedException e) {
@@ -38,7 +49,7 @@ public class SpielerThread extends Spieler implements Runnable {
 		return t;
 	}
 
-	public void setT(Thread t) {
-		this.t = t;
+	public static Object getLock() {
+		return lock;
 	}
 }

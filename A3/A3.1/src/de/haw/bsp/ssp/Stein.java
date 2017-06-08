@@ -1,5 +1,11 @@
 package de.haw.bsp.ssp;
 
+/**
+ * @author Ali Calis
+ * @author Serhat Kocaoez
+ * @author Anil Ersin Kaya
+ * @version 0.1
+ */
 public class Stein implements SpielObjekte {
 	private Spieler spieler;
 

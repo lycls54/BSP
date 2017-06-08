@@ -1,5 +1,11 @@
 package de.haw.bsp.ssp;
 
+/**
+ * @author Ali Calis
+ * @author Serhat Kocaoez
+ * @author Anil Ersin Kaya
+ * @version 0.1
+ */
 public class Schere implements SpielObjekte {
 	Spieler spieler;
 
@@ -18,7 +24,7 @@ public class Schere implements SpielObjekte {
 		}
 
 	}
-	
+
 	public Spieler getSpieler() {
 		return spieler;
 	}

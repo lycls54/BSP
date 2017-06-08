@@ -3,6 +3,12 @@ package de.haw.bsp.mensa;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Ali Calis
+ * @author Serhat Kocaoez
+ * @author Anil Ersin Kaya
+ * @version 0.1
+ */
 public class Mensa {
 
 	private List<Kasse> kassen;

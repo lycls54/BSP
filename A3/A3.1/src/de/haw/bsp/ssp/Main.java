@@ -1,6 +1,13 @@
 package de.haw.bsp.ssp;
 
+/**
+ * @author Ali Calis
+ * @author Serhat Kocaoez
+ * @author Anil Ersin Kaya
+ * @version 0.1
+ */
 public class Main {
+
 	public static void main(String[] args) {
 		SchiedsrichterThread s = new SchiedsrichterThread();
 		SpielerThread s1 = new SpielerThread("Spieler 1");

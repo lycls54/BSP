@@ -3,6 +3,12 @@ package de.haw.bsp.mensa;
 import java.util.Comparator;
 import java.util.Random;
 
+/**
+ * @author Ali Calis
+ * @author Serhat Kocaoez
+ * @author Anil Ersin Kaya
+ * @version 0.1
+ */
 public class Studenten implements Runnable {
 	private String name;
 	private Thread t;
