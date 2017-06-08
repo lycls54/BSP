@@ -1,21 +1,13 @@
 package de.haw.bsp.ssp;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 /**
  * @author Ali Calis
  * @author Serhat Kocaoez
  * @author Anil Ersin Kaya
  * @version 0.1
  */
-=======
 import java.util.concurrent.Semaphore;
 
->>>>>>> 0da5597417e16ea3dad48b818a4df7c80856be47
-=======
-import java.util.concurrent.Semaphore;
-
->>>>>>> 0da5597417e16ea3dad48b818a4df7c80856be47
 public class SchiedsrichterThread extends Schiedsrichter implements Runnable {
 	private Thread t;
 
@@ -36,13 +28,10 @@ public class SchiedsrichterThread extends Schiedsrichter implements Runnable {
 			} catch (InterruptedException e) {
 				getT().interrupt();
 			}
-
-<<<<<<< HEAD
-<<<<<<< HEAD
 				synchronized (this) {
 					notifyAll();
 				}
-			} else {
+			} //else {
 				synchronized (SpielerThread.getLock()) {
 					try {
 						SpielerThread.getLock().wait();
@@ -50,16 +39,12 @@ public class SchiedsrichterThread extends Schiedsrichter implements Runnable {
 						getT().interrupt();
 					}
 				}
-=======
 			synchronized (this) {
 				notifyAll();
->>>>>>> 0da5597417e16ea3dad48b818a4df7c80856be47
-=======
 			synchronized (this) {
 				notifyAll();
->>>>>>> 0da5597417e16ea3dad48b818a4df7c80856be47
 			}
-			// }
+		 //}
 		}
 	}
 
