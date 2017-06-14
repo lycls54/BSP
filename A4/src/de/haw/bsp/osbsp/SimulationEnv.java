@@ -60,6 +60,7 @@ public class SimulationEnv {
 		for (int i = 0; i < NUM_OF_PROCESSES; i++) {
 			pid = os.createProcess(5120); // 20 Seiten bei einer Seitengr��e von
 											// 256 Byte
+		
 			if (pid < 0) {
 				System.out.println("*********** Fehlerhafte Konfiguration: Zu wenig RAM f�r " + NUM_OF_PROCESSES
 						+ " Prozesse! *************");

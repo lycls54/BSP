@@ -319,14 +319,14 @@ public class OperatingSystem {
 		if (pte == null) {
 			System.err.println(String.format("OS: read ERROR %d: Adresse %d ist noch nicht beschrieben", pid, virtAdr));
 			return -1;
-		}
+		} else {
 
-		// Seite vorhanden: Seite valid (im RAM)?
-		if (!pte.valid) {
-			// Seite nicht valid (also auf Platte --> Seitenfehler):
-			pte = handlePageFault(pte, pid);
+			// Seite vorhanden: Seite valid (im RAM)?
+			if (!pte.valid) {
+				// Seite nicht valid (also auf Platte --> Seitenfehler):
+				pte = handlePageFault(pte, pid);
+			}
 		}
-
 		// Statistische Z�hlung
 		eventLog.incrementReadAccesses();
 
@@ -335,8 +335,6 @@ public class OperatingSystem {
 		// reale addresse im speicher
 		int wordAddr = pte.realPageFrameAdr + offset;
 		return readFromRAM(wordAddr);
-		// return 0;
-
 	}
 
 	// --------------- Private Methoden des Betriebssystems
