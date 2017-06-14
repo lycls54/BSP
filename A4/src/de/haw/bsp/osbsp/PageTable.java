@@ -160,7 +160,7 @@ public class PageTable {
 		Random r = new Random();
 		int rnd = r.nextInt(pteRAMlist.size() - 1);
 		os.testOut(String.format("Prozess %d: Random-Algorithmus hat pte ausgew�hlt: %d", pid, rnd));
-		return pteRAMlist.set(rnd, newPte);
+		return pteRAMlist.set(rnd, newPte);// Alte Seite zurückgeben
 	}
 
 	// ----------------------- Hilfsmethode --------------------------------
