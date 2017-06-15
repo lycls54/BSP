@@ -4,7 +4,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import de.haw.bsp.ssp.Schiedsrichter;
+import de.haw.bsp.ssp.model.Schiedsrichter;
 
 /**
  * @author Ali Calis
@@ -35,9 +35,8 @@ public class SchiedsrichterThreadV2 extends Schiedsrichter implements Runnable {
 				condSpieler.signalAll();
 			} catch (InterruptedException e) {
 				getT().interrupt();
-			} finally {
-				lockObj.unlock();
 			}
+			lockObj.unlock();
 		}
 	}
 

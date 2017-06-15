@@ -1,6 +1,6 @@
 package de.haw.bsp.ssp.v2;
 
-import de.haw.bsp.ssp.Tisch;
+import de.haw.bsp.ssp.model.Tisch;
 
 /**
  * @author Ali Calis
@@ -28,7 +28,7 @@ public class MainV2 {
 			cc.getT().interrupt();
 		}
 		cp.getT().interrupt();
-		cp.getT().interrupt();
+		cp2.getT().interrupt();
 		cc.getT().interrupt();
 		System.out.println("Stopped");
 		//

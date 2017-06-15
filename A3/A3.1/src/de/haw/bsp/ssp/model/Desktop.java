@@ -1,4 +1,4 @@
-package de.haw.bsp.ssp;
+package de.haw.bsp.ssp.model;
 
 import java.util.ArrayList;
 import java.util.List;

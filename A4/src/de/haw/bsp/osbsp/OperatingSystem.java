@@ -299,6 +299,7 @@ public class OperatingSystem {
 	 *         Zugriffsfehler
 	 */
 	public synchronized int read(int pid, int virtAdr) {
+		// TODO
 		// eingabe pr�fen
 		if (virtAdr < 0 || virtAdr > VIRT_ADR_SPACE - WORD_SIZE) {
 			System.err.println(
@@ -334,7 +335,10 @@ public class OperatingSystem {
 
 		// reale addresse im speicher
 		int wordAddr = pte.realPageFrameAdr + offset;
-		return readFromRAM(wordAddr);
+
+		testOut("os: read " + pid + " +++ item: " + physRAM.get(wordAddr) + " erfolgreich in virt. adresse " + virtAdr
+				+ " gelesen! ram-adresse: " + wordAddr + " \n");
+		return 0;
 	}
 
 	// --------------- Private Methoden des Betriebssystems
@@ -354,7 +358,8 @@ public class OperatingSystem {
 	 * @return Die entsprechende virtuelle Seitennummer
 	 */
 	private int getVirtualPageNum(int virtAdr) {
-		return virtAdr / PAGE_SIZE;
+		// TODO
+		return (int)(virtAdr / PAGE_SIZE);
 	}
 
 	/**
@@ -363,6 +368,7 @@ public class OperatingSystem {
 	 * @return Den entsprechenden Offset zur Berechnung der realen Adresse
 	 */
 	private int getOffset(int virtAdr) {
+		// TODO
 		// rest berechnung
 		return virtAdr % PAGE_SIZE;
 	}
@@ -475,6 +481,7 @@ public class OperatingSystem {
 	 * @return das item als positive Integerzahl oder -1, falls Adresse nicht
 	 *         belegt
 	 */
+	@SuppressWarnings("unused")
 	private int readFromRAM(int ramAdr) {
 		Integer itemObject;
 		int result;

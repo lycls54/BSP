@@ -1,4 +1,4 @@
-package de.haw.bsp.ssp;
+package de.haw.bsp.ssp.model;
 
 /**
  * @author Ali Calis
@@ -27,6 +27,12 @@ public class Papier implements SpielObjekte {
 
 	public Spieler getSpieler() {
 		return spieler;
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "Papier";
 	}
 
 }

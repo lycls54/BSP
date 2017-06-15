@@ -1,5 +1,7 @@
 package de.haw.bsp.ssp;
 
+import de.haw.bsp.ssp.model.Tisch;
+
 /**
  * @author Ali Calis
  * @author Serhat Kocaoez

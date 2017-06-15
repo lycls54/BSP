@@ -1,5 +1,7 @@
 package de.haw.bsp.ssp;
 
+import de.haw.bsp.ssp.model.Schiedsrichter;
+
 /**
  * @author Ali Calis
  * @author Serhat Kocaoez
@@ -18,7 +20,7 @@ public class SchiedsrichterThread extends Schiedsrichter implements Runnable {
 					try {
 						SpielerThread.lock.wait();
 					} catch (InterruptedException e) {
-						getT().interrupt();
+						t.interrupt();
 					}
 				}
 			}

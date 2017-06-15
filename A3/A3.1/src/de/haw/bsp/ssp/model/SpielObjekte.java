@@ -1,4 +1,4 @@
-package de.haw.bsp.ssp;
+package de.haw.bsp.ssp.model;
 
 /**
  * @author Ali Calis

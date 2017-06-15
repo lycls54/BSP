@@ -1,6 +1,6 @@
 package de.haw.bsp.ssp.v2;
 
-import de.haw.bsp.ssp.Spieler;
+import de.haw.bsp.ssp.model.Spieler;
 
 /**
  * @author Ali Calis
@@ -28,9 +28,8 @@ public class SpielerThreadV2 extends Spieler implements Runnable {
 				((SchiedsrichterThreadV2) getTisch().getS()).condSpieler.await();
 			} catch (InterruptedException e) {
 				getT().interrupt();
-			} finally {
-				((SchiedsrichterThreadV2) getTisch().getS()).lockObj.unlock();
 			}
+			((SchiedsrichterThreadV2) getTisch().getS()).lockObj.unlock();
 
 		}
 	}

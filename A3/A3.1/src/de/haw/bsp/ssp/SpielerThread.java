@@ -1,5 +1,7 @@
 package de.haw.bsp.ssp;
 
+import de.haw.bsp.ssp.model.Spieler;
+
 /**
  * @author Ali Calis
  * @author Serhat Kocaoez
@@ -21,7 +23,6 @@ public class SpielerThread extends Spieler implements Runnable {
 				getTisch().getDesktop().add((choose()));
 				try {
 					synchronized (lock) {
-
 						lock.notifyAll();
 					}
 					getTisch().getS().wait();

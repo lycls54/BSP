@@ -1,4 +1,4 @@
-package de.haw.bsp.ssp;
+package de.haw.bsp.ssp.model;
 
 /**
  * @author Ali Calis
@@ -51,4 +51,9 @@ public class Spieler {
 		this.name = name;
 	}
 
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return name;
+	}
 }

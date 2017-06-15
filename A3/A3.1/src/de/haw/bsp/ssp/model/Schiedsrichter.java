@@ -1,4 +1,4 @@
-package de.haw.bsp.ssp;
+package de.haw.bsp.ssp.model;
 
 /**
  * @author Ali Calis
@@ -16,8 +16,10 @@ public class Schiedsrichter {
 
 	public void auswerten() {
 		if (tisch.getDesktop().size() != 2) {
-			System.out.println("nicht auswertbar");
-			System.out.println(tisch.getDesktop().size());
+			// System.out.println(ergebnis[0] + ergebnis[1] + ergebnis[2] + 1 +
+			// ". runde ist nicht auswertbar");
+			// System.out.println(2 - (tisch.getDesktop().size()) + " spieler
+			// haben nicht gespielt \n");
 			return;
 		}
 		Spieler winner = winner();
@@ -41,6 +43,8 @@ public class Schiedsrichter {
 			winner = desktop.get(1).getSpieler();
 		} else {
 		}
+		System.out.println(desktop.get(0) + "" + desktop.get(1) + " winner = " + winner + desktop.get(0).getSpieler()
+				+ "" + desktop.get(1).getSpieler() + " winner = " + winner);
 		return winner;
 	}
 
